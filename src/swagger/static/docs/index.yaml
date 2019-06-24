@@ -1,0 +1,158 @@
+openapi: 3.0.0
+info:
+  version: "1.0.0"
+  title: "Medical API documentation\n You can also find admin panel at http://localhost:8000/admin"
+tags:
+  - name: "equipment"
+    description: "CRUD equipment"
+  - name: "user"
+    description: "Operations with user"
+  - name: "featured equipment"
+    description: "user`s featured equipment"
+  - name: additional
+    description: Additional requests
+servers:
+  - url: "http://localhost:8000"
+paths:
+  /api/equipment/:
+    get:
+      tags:
+        - equipment
+      $ref: ./equipment/paths.yaml#/getAll
+    post:
+      tags:
+        - equipment
+      $ref: ./equipment/paths.yaml#/create
+      security:
+        - Token: []
+  /api/equipment/{id}:
+    get:
+      tags:
+        - equipment
+      $ref: ./equipment/paths.yaml#/getCurrent
+    put:
+      tags:
+        - equipment
+      $ref: ./equipment/paths.yaml#/update
+      security:
+        - Token: []
+    delete:
+      tags:
+        - equipment
+      $ref: ./equipment/paths.yaml#/delete
+      security:
+        - Token: []
+  /api/auth/user/:
+    get:
+      tags:
+        - "user"
+      $ref: ./accounts/paths.yaml#/getUser
+      security:
+        - Token: []
+  /api/auth/register/:
+    post:
+      tags:
+        - user
+      $ref: ./accounts/paths.yaml#/register
+  /api/auth/login/:
+    post:
+      tags:
+        - user
+      $ref: ./accounts/paths.yaml#/login
+  /api/auth/logout/:
+    post:
+      tags:
+        - user
+      $ref: ./accounts/paths.yaml#/logout
+      security:
+        - Token: []
+  /api/featured/:
+    get:
+      tags:
+        - featured equipment
+      $ref: ./featured/paths.yaml#/getAll
+      security:
+        - Token: []
+    post:
+      tags:
+        - featured equipment
+      $ref: ./featured/paths.yaml#/create
+      security:
+        - Token: []
+  /api/featured/{id}:
+    get:
+      tags:
+        - featured equipment
+      $ref: ./featured/paths.yaml#/getCurrent
+      security:
+        - Token: []
+    delete:
+      tags:
+        - featured equipment
+      $ref: ./featured/paths.yaml#/delete
+      security:
+        - Token: []
+  /api/send-message:
+    post:
+      tags:
+        - additional
+      $ref: ./additional/paths.yaml#/sendMessage
+  /api/countries/:
+    get:
+      tags:
+        - additional
+      $ref: ./additional/paths.yaml#/getCountries
+  /api/types/:
+    get:
+      tags:
+        - additional
+      $ref: ./additional/paths.yaml#/getTypes
+  /api/groups/:
+    get:
+      tags:
+        - additional
+      $ref: ./additional/paths.yaml#/getGroups
+  /api/subgroups/:
+    get:
+      tags:
+        - additional
+      $ref: ./additional/paths.yaml#/getSubgroups
+  /api/manufacturers/:
+    get:
+      tags:
+        - additional
+      $ref: ./additional/paths.yaml#/getManufacturers
+  /api/markets/:
+    get:
+      tags:
+        - additional
+      $ref: ./additional/paths.yaml#/getMarkets
+
+components:
+  securitySchemes:
+    Token:
+      description: "
+      For accessing the API a valid token must be passed in all the queries in
+      the 'Authorization' header.
+      The following syntax must be used in the 'Authorization' header :
+                      Value: apiKey"
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+  schemas:
+    Market:
+      $ref: './models.yaml#/Market'
+    Eqipment:
+      $ref: './models.yaml#/Equipment'
+    Manufacturer:
+      $ref: './models.yaml#/Manufacturer'
+    Country:
+      $ref: './models.yaml#/Country'
+    Type:
+      $ref: './models.yaml#/Type'
+    Group:
+      $ref: './models.yaml#/Group'
+    SubGroup:
+      $ref: './models.yaml#/SubGroup'
+    User:
+      $ref: './models.yaml#/User'

@@ -1,0 +1,9 @@
+/*
+!.gitignore
+!/equipment/
+/equipment/*
+!/equipment/2019/
+/equipment/2019/*
+!/equipment/2019/05/
+/equipment/2019/05/*
+!/equipment/2019/05/13/

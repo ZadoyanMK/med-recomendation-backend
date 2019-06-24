@@ -1,0 +1,10 @@
+Django
+psycopg2-binary
+celery
+django-celery-results
+Pillow
+django-ckeditor
+djangorestframework
+django-rest-knox
+mysqlclient
+django-cors-headers
